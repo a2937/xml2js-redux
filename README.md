@@ -497,5 +497,5 @@ README. Open an issue and provide a minimum reproducable example, then I'll take
 
 #### Acknowledgements
 
-Special thanks to [Leonidads](https://github.com/Leonidas-from-XIV) for creating his initial library and all contributors 
+Special thanks to [Leonidads](https://github.com/Leonidas-from-XIV) for creating his initial library and all contributors
 on the original project.
