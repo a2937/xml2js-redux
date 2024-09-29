@@ -78,7 +78,9 @@
     "xmlbuilder": "~15.1.1"
   },
   "devDependencies": {
+    "@types/diff": "^5.2.2",
     "@types/jest": "^29.5.13",
+    "@types/sax": "^1.2.7",
     "coveralls": "^3.0.1",
     "diff": ">=1.0.8",
     "docco": ">=0.6.2",

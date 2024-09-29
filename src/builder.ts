@@ -1,28 +1,29 @@
 import builder from 'xmlbuilder'
 import { defaults } from './defaults'
 
-const requiresCDATA = entry => (typeof entry === 'string') && ((entry.indexOf('&') >= 0) || (entry.indexOf('>') >= 0) || (entry.indexOf('<') >= 0))
+const requiresCDATA = (entry: string | string[]) => (typeof entry === 'string') && ((entry.indexOf('&') >= 0) || (entry.indexOf('>') >= 0) || (entry.indexOf('<') >= 0))
 
 // Note that we do this manually instead of using xmlbuilder's `.dat` method
 // since it does not support escaping the CDATA close entity (throws an error if
 // it exists, and if it's pre-escaped).
-const wrapCDATA = entry => `<![CDATA[${escapeCDATA(entry)}]]>`
+const wrapCDATA = (entry: string) => `<![CDATA[${escapeCDATA(entry)}]]>`
 
-const escapeCDATA = entry => // Split the CDATA section in two;
+const escapeCDATA = (entry: string) => // Split the CDATA section in two;
   // The first contains the ']]'
   // The second contains the '>'
   // When later parsed, it will be put back together as ']]>'
   entry.replace(']]>', ']]]]><![CDATA[>')
 
 class Builder {
-  constructor(opts) {
+  options: any
+  constructor(opts: any = {}) {
     // copy this versions default options
     // overwrite them with the specified options, if any
-    this.options = Object.assign({}, defaults['0.2'], opts || {})
+    this.options = Object.assign({}, defaults['0.2'], opts)
   }
 
-  buildObject(rootObj) {
-    let rootName
+  buildObject(rootObj: { [x: string]: any }) {
+    let rootName: string | { [name: string]: Object }
     const {
       attrkey,
       charkey
@@ -41,8 +42,12 @@ class Builder {
       } = this.options)
     }
 
-    const render = (element, obj) => {
-      let child, entry, index, key
+    const render = (element: builder.XMLElement, obj: string | string[]) => {
+      let child: string[] | string;
+      let entry: string | string[];
+      let index: string | number;
+      let key: string | number;
+
       if (typeof obj !== 'object') {
         // single element, just append it as text
         if (this.options.cdata && requiresCDATA(obj)) {
@@ -54,7 +59,7 @@ class Builder {
         // fix issue #119
         for (index of Object.keys(obj)) {
           child = obj[index]
-          for (key in child) {
+          for (key of child) {
             entry = child[key]
             element = render(element.ele(key), entry).up()
           }
