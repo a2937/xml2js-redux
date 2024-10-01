@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./output",
+    "allowJs": true,
+    "target": "es5",
+    "lib": ["es6"],
+    "moduleDetection": "force",
+    "types": ["node"]
+  },
+  "include": ["./src/**/*"]
+}

@@ -57,6 +57,7 @@
     "James Crosby (https://github.com/autopulated)"
   ],
   "main": "./lib/xml2js",
+  "type": "module",
   "files": [
     "lib"
   ],
@@ -64,11 +65,9 @@
     "lib": "./lib"
   },
   "scripts": {
-    "build": "coffee --compile --output lib/ src/",
     "test": "jest",
     "coverage": "jest --coverage",
-    "coveralls": "jest --coverage && coveralls < coverage/lcov.info",
-    "doc": "docco src/xml2js.coffee"
+    "coveralls": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -79,18 +78,18 @@
     "xmlbuilder": "~15.1.1"
   },
   "devDependencies": {
-    "coffeescript": ">=2.7",
-    "coffeescript-jest-preset": "^1.0.0",
+    "@types/diff": "^5.2.2",
+    "@types/jest": "^29.5.13",
+    "@types/sax": "^1.2.7",
     "coveralls": "^3.0.1",
     "diff": ">=1.0.8",
     "docco": ">=0.6.2",
     "jest": "^26.6.1"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=16.0.0"
   },
   "jest": {
-    "preset": "coffeescript-jest-preset",
     "coverageReporters": [
       "lcov",
       "text"
